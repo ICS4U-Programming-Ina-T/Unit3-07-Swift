@@ -20,7 +20,8 @@ class Vehicle {
     var speed: Int
     var maxSpeed: Int
 
-    init(plateNum: String, colour: String, doorNum: Int, speed: Int, maxSpeed: Int) {
+    // default constructor
+    init(plateNum: String, colour: String, doorNum: Int, seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
         // referncing objects passed in
         self.plateNum = plateNum
         self.colour = colour
@@ -76,38 +77,119 @@ class Vehicle {
         print("Colour: \(colour)")
         print("Number of doors: \(doorNum)")
         print("Number of seats: \(seatNum)")
-        print("Length: \(length)")
+        print("Length: \(length) ft")
         print("Speed: \(speed) km/h")
         print("Max speed: \(maxSpeed) km/h")
     }
 }
 
+// inherits characterisitcs from vehicle class
 class Truck: Vehicle {
     // properties
-    private var wheelNum: Int
-    private var plateNum: String
-    private var doorNum: Int
+    var wheelNum: Int
 
-    init(plateNum: String, colour: String, doorNum: Int, wheelNum: Int, seatNum: Int, length: Int, speed: Int, maxSpeed: Int)
-    
+    // default constructor
+    init(plateNum: String, colour: String, doorNum: Int, wheelNum: Int,
+         seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
+        self.wheelNum = wheelNum
+        super.init(plateNum: "", colour: colour, doorNum: doorNum,
+            seatNum: seatNum, length: length, speed: speed, maxSpeed: maxSpeed)
+    }
+
+    // uses polymorphism to alter format of vehicle info
+    override internal func getInfo() {
+        // applies appropriate format for information
+        print("License plate: \(plateNum)")
+        print("Colour: \(colour)")
+        print("Number of doors: \(doorNum)")
+        print("Number of wheels: \(wheelNum)")
+        print("Number of seats: \(seatNum)")
+        print("Length: \(length) ft")
+        print("Speed: \(speed) km/h")
+        print("Max speed: \(maxSpeed) km/h")
+    }
 }
 
+// inherits characterisitcs from vehicle class
 class Bike: Vehicle {
-    
+    // properties
+    var wheelNum: Int
+
+    // default constructor
+    init(colour: String, wheelNum: Int, seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
+        self.wheelNum = wheelNum
+        super.init(plateNum: "", colour: colour, doorNum: 0,
+            seatNum: seatNum, length: length, speed: speed, maxSpeed: maxSpeed)
+    }
+
+    // uses polymorphism to alter format of vehicle info
+    override internal func getInfo() {
+        // applies appropriate format for information
+        print("Colour: \(colour)")
+        print("Number of wheels: \(wheelNum)")
+        print("Number of seats: \(seatNum)")
+        print("Length: \(length) ft")
+        print("Speed: \(speed) km/h")
+        print("Max speed: \(maxSpeed) km/h")
+    }
 }
 
+// inherits characterisitcs from vehicle class
 class Plane: Vehicle {
-    
+    // properties
+    var wheelNum: Int
+    var tailNum: String
+
+    // default constructor
+    init(tailNum: String, colour: String, doorNum: Int, wheelNum: Int,
+         seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
+        self.wheelNum = wheelNum
+        self.tailNum = tailNum
+        super.init(plateNum: "", colour: colour,
+            doorNum: doorNum, seatNum: seatNum, length: length, speed: speed, maxSpeed: maxSpeed)
+    }
+
+    // uses polymorphism to alter format of vehicle info
+    override internal func getInfo() {
+        // applies appropriate format for information
+        print("Tail number: \(tailNum)")
+        print("Colour: \(colour)")
+        print("Number of doors: \(doorNum)")
+        print("Number of wheels: \(wheelNum)")
+        print("Number of seats: \(seatNum)")
+        print("Length: \(length) ft")
+        print("Speed: \(speed) km/h")
+        print("Max speed: \(maxSpeed) km/h")
+    }
 }
 
+// inherits characterisitcs from vehicle class
 class Boat: Vehicle {
-    
+
+    // default constructor
+    init(colour: String, seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
+        super.init(plateNum: "", colour: colour, doorNum: 0, seatNum: seatNum,
+            length: length, speed: speed, maxSpeed: maxSpeed)
+    }
+
+    // uses polymorphism to alter format of vehicle info
+    override internal func getInfo() {
+        // applies appropriate format for information
+        print("Colour: \(colour)")
+        print("Number of seats: \(seatNum)")
+        print("Length: \(length) ft")
+        print("Speed: \(speed) km/h")
+        print("Max speed: \(maxSpeed) km/h")
+    }
 }
 
 // creating vehicles
-var myTruck = Truck(plateNum: "BBV 4389", colour: "Navy Blue", doorNum: 4, wheelNum: 22, seatNum: 2, length: 19, speed: 0, maxSpeed: 85)
-var myBike = Bike(colour: "Purple", wheelNum: 3, seatNum: 2, length: 8, speed: 0, maxSpeed: 55)
-var myPlane = Plane(tailNum: "C-MEX", colour: "White", doorNum: 6, wheelNum: 16, seatNum: 52, length: 120, speed: 0, maxSpeed: 1300)
+var myTruck = Truck(plateNum: "BBV 4389", colour: "Navy Blue",
+    doorNum: 4, wheelNum: 22, seatNum: 2, length: 19, speed: 0, maxSpeed: 85)
+var myBike = Bike(colour: "Purple", wheelNum: 3, seatNum: 2,
+    length: 8, speed: 0, maxSpeed: 55)
+var myPlane = Plane(tailNum: "C-MEX", colour: "White", doorNum: 6,
+    wheelNum: 16, seatNum: 52, length: 120, speed: 0, maxSpeed: 1300)
 var myBoat = Boat(colour: "Beige", seatNum: 4, length: 12, speed: 0, maxSpeed: 5)
 
 // declaring variables
