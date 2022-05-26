@@ -11,21 +11,41 @@
 // to properly print the information and alter the speed.
 
 class Vehicle {
+    // adds acceleration to the current speed
+    internal func accelerate(accelNum: Int) {}
+
+    // alters the speed by applying brakes
+    internal func brake(brakeNum: Int) {}
+
+    // tells the user the current speed
+    internal func getSpeed() {}
+
+    // tells the user what the max speed of a vehicle is
+    internal func getMaxSpeed() {}
+
+    // tells user information and characteristics about a vehicle
+    internal func getInfo() {}
+}
+
+// inherits characterisitcs from vehicle class
+class Truck: Vehicle {
     // properties
     var plateNum: String
     var colour: String
     var doorNum: Int
+    var wheelNum: Int
     var seatNum: Int
     var length: Int
     var speed: Int
     var maxSpeed: Int
 
     // default constructor
-    init(plateNum: String, colour: String, doorNum: Int, seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
-        // referncing objects passed in
+    init(plateNum: String, colour: String, doorNum: Int, wheelNum: Int,
+         seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
         self.plateNum = plateNum
         self.colour = colour
         self.doorNum = doorNum
+        self.wheelNum = wheelNum
         self.seatNum = seatNum
         self.length = length
         self.speed = speed
@@ -33,7 +53,7 @@ class Vehicle {
     }
 
     // adds acceleration to the current speed
-    internal func accelerate(accelNum: Int) {
+    override internal func accelerate(accelNum: Int) {
         // adds acceleration
         let newSpeed: Int = speed + accelNum
         speed = newSpeed
@@ -47,7 +67,7 @@ class Vehicle {
     }
 
     // alters the speed by applying brakes
-    internal func brake(brakeNum: Int) {
+    override internal func brake(brakeNum: Int) {
         // decreases amount of current speed
         let newSpeed: Int = speed - brakeNum
         speed = newSpeed
@@ -61,39 +81,13 @@ class Vehicle {
     }
 
     // tells the user the current speed
-    internal func getSpeed() {
+    override internal func getSpeed() {
         print("Current speed: \(speed) km/h")
     }
 
     // tells the user what the max speed of a vehicle is
-    internal func getMaxSpeed() {
+    override internal func getMaxSpeed() {
         print("Max speed: \(maxSpeed) km/h")
-    }
-
-    // tells user information and characteristics about a vehicle
-    internal func getInfo() {
-        // applies appropriate format for information
-        print("License plate: \(plateNum)")
-        print("Colour: \(colour)")
-        print("Number of doors: \(doorNum)")
-        print("Number of seats: \(seatNum)")
-        print("Length: \(length) ft")
-        print("Speed: \(speed) km/h")
-        print("Max speed: \(maxSpeed) km/h")
-    }
-}
-
-// inherits characterisitcs from vehicle class
-class Truck: Vehicle {
-    // properties
-    var wheelNum: Int
-
-    // default constructor
-    init(plateNum: String, colour: String, doorNum: Int, wheelNum: Int,
-         seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
-        self.wheelNum = wheelNum
-        super.init(plateNum: "", colour: colour, doorNum: doorNum,
-            seatNum: seatNum, length: length, speed: speed, maxSpeed: maxSpeed)
     }
 
     // uses polymorphism to alter format of vehicle info
@@ -113,13 +107,59 @@ class Truck: Vehicle {
 // inherits characterisitcs from vehicle class
 class Bike: Vehicle {
     // properties
+    var colour: String
     var wheelNum: Int
+    var seatNum: Int
+    var length: Int
+    var speed: Int
+    var maxSpeed: Int
 
     // default constructor
     init(colour: String, wheelNum: Int, seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
+        self.colour = colour
         self.wheelNum = wheelNum
-        super.init(plateNum: "", colour: colour, doorNum: 0,
-            seatNum: seatNum, length: length, speed: speed, maxSpeed: maxSpeed)
+        self.seatNum = seatNum
+        self.length = length
+        self.speed = speed
+        self.maxSpeed = maxSpeed
+    }
+
+    // adds acceleration to the current speed
+    override internal func accelerate(accelNum: Int) {
+        // adds acceleration
+        let newSpeed: Int = speed + accelNum
+        speed = newSpeed
+
+        // checks if speed is greater than max speed
+        if speed > maxSpeed {
+            speed = maxSpeed
+        }
+
+        print("Vehicle has accelerated \(accelNum) km/h.")
+    }
+
+    // alters the speed by applying brakes
+    override internal func brake(brakeNum: Int) {
+        // decreases amount of current speed
+        let newSpeed: Int = speed - brakeNum
+        speed = newSpeed
+
+        // checks to make sure speed is not negative
+        if speed < 0 {
+            speed = 0
+        }
+
+        print("A brake of \(brakeNum) km/h has been applied.")
+    }
+
+    // tells the user the current speed
+    override internal func getSpeed() {
+        print("Current speed: \(speed) km/h")
+    }
+
+    // tells the user what the max speed of a vehicle is
+    override internal func getMaxSpeed() {
+        print("Max speed: \(maxSpeed) km/h")
     }
 
     // uses polymorphism to alter format of vehicle info
@@ -137,16 +177,64 @@ class Bike: Vehicle {
 // inherits characterisitcs from vehicle class
 class Plane: Vehicle {
     // properties
-    var wheelNum: Int
     var tailNum: String
+    var colour: String
+    var doorNum: Int
+    var wheelNum: Int
+    var seatNum: Int
+    var length: Int
+    var speed: Int
+    var maxSpeed: Int
 
     // default constructor
     init(tailNum: String, colour: String, doorNum: Int, wheelNum: Int,
          seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
-        self.wheelNum = wheelNum
         self.tailNum = tailNum
-        super.init(plateNum: "", colour: colour,
-            doorNum: doorNum, seatNum: seatNum, length: length, speed: speed, maxSpeed: maxSpeed)
+        self.colour = colour
+        self.doorNum = doorNum
+        self.wheelNum = wheelNum
+        self.seatNum = seatNum
+        self.length = length
+        self.speed = speed
+        self.maxSpeed = maxSpeed
+    }
+
+    // adds acceleration to the current speed
+    override internal func accelerate(accelNum: Int) {
+        // adds acceleration
+        let newSpeed: Int = speed + accelNum
+        speed = newSpeed
+
+        // checks if speed is greater than max speed
+        if speed > maxSpeed {
+            speed = maxSpeed
+        }
+
+        print("Vehicle has accelerated \(accelNum) km/h.")
+    }
+
+    // alters the speed by applying brakes
+    override internal func brake(brakeNum: Int) {
+        // decreases amount of current speed
+        let newSpeed: Int = speed - brakeNum
+        speed = newSpeed
+
+        // checks to make sure speed is not negative
+        if speed < 0 {
+            speed = 0
+        }
+
+        print("A brake of \(brakeNum) km/h has been applied.")
+    }
+
+    // tells the user the current speed
+    override internal func getSpeed() {
+        print("Current speed: \(speed) km/h")
+    }
+
+    // tells the user what the max speed of a vehicle is
+    override internal func getMaxSpeed() {
+        print("Max speed: \(maxSpeed) km/h")
     }
 
     // uses polymorphism to alter format of vehicle info
@@ -165,11 +253,58 @@ class Plane: Vehicle {
 
 // inherits characterisitcs from vehicle class
 class Boat: Vehicle {
+    // properties
+    var colour: String
+    var seatNum: Int
+    var length: Int
+    var speed: Int
+    var maxSpeed: Int
 
     // default constructor
     init(colour: String, seatNum: Int, length: Int, speed: Int, maxSpeed: Int) {
-        super.init(plateNum: "", colour: colour, doorNum: 0, seatNum: seatNum,
-            length: length, speed: speed, maxSpeed: maxSpeed)
+        self.colour = colour
+        self.seatNum = seatNum
+        self.length = length
+        self.speed = speed
+        self.maxSpeed = maxSpeed
+    }
+
+    // adds acceleration to the current speed
+    override internal func accelerate(accelNum: Int) {
+        // adds acceleration
+        let newSpeed: Int = speed + accelNum
+        speed = newSpeed
+
+        // checks if speed is greater than max speed
+        if speed > maxSpeed {
+            speed = maxSpeed
+        }
+
+        print("Vehicle has accelerated \(accelNum) km/h.")
+    }
+
+    // alters the speed by applying brakes
+    override internal func brake(brakeNum: Int) {
+        // decreases amount of current speed
+        let newSpeed: Int = speed - brakeNum
+        speed = newSpeed
+
+        // checks to make sure speed is not negative
+        if speed < 0 {
+            speed = 0
+        }
+
+        print("A brake of \(brakeNum) km/h has been applied.")
+    }
+
+    // tells the user the current speed
+    override internal func getSpeed() {
+        print("Current speed: \(speed) km/h")
+    }
+
+    // tells the user what the max speed of a vehicle is
+    override internal func getMaxSpeed() {
+        print("Max speed: \(maxSpeed) km/h")
     }
 
     // uses polymorphism to alter format of vehicle info
